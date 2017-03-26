@@ -5,7 +5,9 @@ import Add from './tabs/add'
 import Search from './tabs/search'
 import Settings from './tabs/settings'
 import Tab from './tab'
-
+import Header from '../app/components/Header'
+import Map from '../app/components/Map'
+import Input from '../app/components/Input'
 
 /**
 * Define you views here as a map, where the key is
@@ -18,5 +20,8 @@ export default createRouter(() => ({
   favorite: () => Favorite,
   add: () => Add,
   search: () => Search,
-  settings: () => Settings
+  settings: () => Settings,
+  header: () => Header,
+  map: () => Map,
+  input: () => Input
 }))

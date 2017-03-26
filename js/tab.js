@@ -4,7 +4,7 @@ import {
   TabNavigationItem as TabItem,
 } from '@expo/ex-navigation';
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import Router from './router'
 
 
@@ -24,6 +24,7 @@ export default class Tab extends Component {
         navigatorUID="main"
         initialTab="home">
         <TabItem
+          style={styles.cont}
           id="home"
           renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_home.png')} /> }>
           <StackNavigation
@@ -34,6 +35,7 @@ export default class Tab extends Component {
         </TabItem>
 
         <TabItem
+          style={styles.cont}
           id="search"
           renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_search.png')} /> }>
           <StackNavigation
@@ -43,8 +45,9 @@ export default class Tab extends Component {
         </TabItem>
 
         <TabItem
+          style={styles.cont}
           id="add"
-          renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_add.png')} /> }>
+          renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_add_circle_outline.png')} /> }>
           <StackNavigation
             id="profile"
             initialRoute={Router.getRoute('add')}
@@ -52,8 +55,9 @@ export default class Tab extends Component {
         </TabItem>
 
         <TabItem
+          style={styles.cont}
           id="favorite"
-          renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_favorite.png')} /> }>
+          renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_favorite_border.png')} /> }>
           <StackNavigation
             id="posts"
             initialRoute={Router.getRoute('favorite')}
@@ -61,6 +65,7 @@ export default class Tab extends Component {
         </TabItem>
 
         <TabItem
+          style={styles.cont}
           id="settings"
           renderIcon={(isSelected) => <Image source={require('../assets/icons/ic_settings.png')} /> }>
           <StackNavigation
@@ -72,3 +77,9 @@ export default class Tab extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  cont: {
+    backgroundColor: '#B0F6E6'
+  }
+})
