@@ -8,8 +8,8 @@ import {
 
 export default class Input extends Component {
   constructor (props) {
-    super (props)
-    this.state = { text: 'Location' }
+    super(props)
+    this.state = { text: ' ' }
   }
 
   render () {

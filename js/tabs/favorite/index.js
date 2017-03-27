@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 import Header from '../../../app/components/Header'
@@ -22,26 +23,46 @@ export default class HomeScreen extends React.Component {
         </View>
 
         <View style={styles.rowOne}>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
         </View>
 
         <View style={styles.rowTwo}>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
         </View>
 
         <View style={styles.rowThree}>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
         </View>
 
         <View style={styles.rowFour}>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this._goToSpot}>
+            <Text style={styles.imgPlaceholder}>Placeholder</Text>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     )
+  }
+
+  _goToSpot = () => {
+    this.props.navigator.push('spot')
   }
 }
 
