@@ -7,12 +7,46 @@ import {
   ScrollView,
   TouchableWithoutFeedback
 } from 'react-native'
+import { Permissions, Location } from 'expo'
 
 import Header from '../../../app/components/Header'
 import Map from '../../../app/components/Map'
 import Input from '../../../app/components/Input'
 
 export default class Search extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loading: false,
+      spots: null
+    }
+  }
+
+  componentDidMount () {
+    Permissions.getAsync(Permissions.LOCATION)
+      .then(result => {
+        if (result.status === 'granted') {
+          return Location.getCurrentPositionAsync()
+        }
+        return Promise.resolve()
+      })
+      .then(coords => {
+        // Default to Parque Luis Muñoz Marín if no location is granted
+        let latitude = coords.latitude || 18.411178
+        let longitude = coords.longitude || -66.072216
+        return fetch(`http://localhost:3000/spots?location=true&latitude${latitude}&longitude=${longitude}`)
+      })
+      .then(data => {
+        this.setState({
+          loading: false,
+          spots: data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   render () {
     return (
       <View style={styles.container}>
