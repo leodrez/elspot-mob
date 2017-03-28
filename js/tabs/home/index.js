@@ -7,15 +7,10 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
-import Header from '../../../app/components/Header'
-
 export default class Home extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Header />
-        </View>
 
         <View style={styles.main}>
           <TouchableWithoutFeedback onPress={this._goToSpot}>

@@ -7,7 +7,6 @@ import {
   StyleSheet
 } from 'react-native'
 
-import Header from '../../../app/components/Header'
 
 const onButtonPress = () => {
   Alert.alert('You have been logged out');
@@ -17,10 +16,6 @@ export default class Settings extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-        </View>
-
         <View style={styles.btn}>
           <Button
             onPress={onButtonPress}

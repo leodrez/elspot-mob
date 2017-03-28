@@ -7,16 +7,11 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
-import Header from '../../../app/components/Header'
-
 export default class HomeScreen extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-        </View>
 
         <View style={styles.favorites}>
           <Text style={styles.txt}>FAVORITES</Text>

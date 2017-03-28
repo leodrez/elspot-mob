@@ -5,21 +5,20 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
-  TouchableWithoutFeedback
+  ListView,
+  TouchableWithoutFeedback,
+  Image
 } from 'react-native'
-import { Permissions, Location } from 'expo'
-
-import Header from '../../../app/components/Header'
-import Map from '../../../app/components/Map'
-import Input from '../../../app/components/Input'
+import { Permissions, Location, MapView } from 'expo'
 
 export default class Search extends Component {
   constructor (props) {
-    super(props)
+    super(props)    
     this.state = {
       loading: false,
-      spots: null
+      spots: []
     }
+
   }
 
   componentDidMount () {
@@ -32,9 +31,10 @@ export default class Search extends Component {
       })
       .then(coords => {
         // Default to Parque Luis Muñoz Marín if no location is granted
-        let latitude = coords.latitude || 18.411178
-        let longitude = coords.longitude || -66.072216
-        return fetch(`http://localhost:3000/spots?location=true&latitude${latitude}&longitude=${longitude}`)
+        // let latitude = coords.latitude || 18.411178
+        // let longitude = coords.longitude || -66.072216
+        // return fetch(`http://localhost:3000/spots?location=true&latitude${latitude}&longitude=${longitude}`)
+        return Promise.resolve(['row1', 'row2', 'row2'])
       })
       .then(data => {
         this.setState({
@@ -50,44 +50,22 @@ export default class Search extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-        </View>
-        <View style={styles.input}>
-          <Input />
-        </View>
-
-        <View style={styles.mapa}>
-          <Map />
-        </View>
-
-        <View style={styles.near}>
-          <Text style={styles.txt}>NEAR</Text>
-        </View>
-
-        <View style={styles.rowOne}>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-        </View>
-
-        <View style={styles.rowTwo}>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
+        <View style={styles.headerContainer}>
+          <View style={styles.header}>
+            <Image source={require('../../../assets/icons/ic_elspotpink.png')} />
           </View>
+        </View>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 18.466333,
+            longitude: -66.105721,
+            latitudeDelta: 1.0,
+            longitudeDelta: 0.9,
+          }}
+        />
       </View>
     )
-  }
-
-  _goToSpot = () => {
-    this.props.navigator.push('spot')
   }
 }
 
@@ -96,39 +74,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#252839'
   },
-  input: {
-    flex: 1,
-    justifyContent: 'center'
+  headerContainer: {
+    height: 55,
   },
-  mapa: {
-    flex: 4,
-    paddingHorizontal: 5
-  },
-  near: {
+  header: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingHorizontal: 5
+    alignItems: 'center',
+    backgroundColor: '#EDF5FA',
+    paddingTop: 10
   },
-  txt: {
-    color: '#B0F6E6',
-    fontSize: 18
-  },
-  rowOne: {
-    flex: 2,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5
-  },
-  rowTwo: {
-    flex: 2,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5
-  },
-  imgPlaceholder: {
-    height: Dimensions.get('window').height - 560,
-    width: Dimensions.get('window').width - 195,
-    backgroundColor: '#fff'
+  map: {
+    flex: 1
   }
 })

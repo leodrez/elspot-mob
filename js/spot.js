@@ -6,17 +6,10 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
-import Header from '../../../app/components/Header'
-import Map from '../../../app/components/Map'
-
 export default class Spot extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-        </View>
-
         <View style={styles.btnWrapper}>
           <View style={styles.backBtn}>
             <TouchableWithoutFeedback onPress={this._goBack}>
@@ -44,7 +37,6 @@ export default class Spot extends Component {
         </View>
 
         <View style={styles.mapa}>
-          <Map />
         </View>
       </View>
     )

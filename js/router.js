@@ -4,11 +4,8 @@ import Favorite from './tabs/favorite'
 import Add from './tabs/add'
 import Search from './tabs/search'
 import Settings from './tabs/settings'
-import Spot from './tabs/spot'
+import Spot from './spot'
 import Tab from './tab'
-import Header from '../app/components/Header'
-import Map from '../app/components/Map'
-import Input from '../app/components/Input'
 
 /**
 * Define you views here as a map, where the key is
@@ -23,7 +20,5 @@ export default createRouter(() => ({
   search: () => Search,
   settings: () => Settings,
   spot: () => Spot,
-  header: () => Header,
-  map: () => Map,
-  input: () => Input
+  header: () => Header
 }))

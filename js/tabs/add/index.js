@@ -5,13 +5,11 @@ import {
   Text,
   TouchableWithoutFeedback,
   Dimensions,
-  StyleSheet
+  StyleSheet,
+  TextInput
 } from 'react-native'
 
 import { ImagePicker } from 'expo'
-
-import Header from '../../../app/components/Header'
-import Input from '../../../app/components/Input'
 
 export default class Add extends Component {
   componentDidMount () {
@@ -32,10 +30,6 @@ export default class Add extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-        </View>
-
         <View style={styles.addwrapper}>
           <View style={styles.add}>
             <TouchableWithoutFeedback onPress={this._launchCamera}>
@@ -49,28 +43,28 @@ export default class Add extends Component {
           <Text style={styles.txt}>Location:</Text>
         </View>
           <View style={styles.inp}>
-            <Input />
+            <TextInput/>
           </View>
 
           <View style={styles.txtwrapper}>
             <Text style={styles.txt}>Category:</Text>
           </View>
           <View style={styles.inp}>
-            <Input />
+            <TextInput/>
           </View>
 
           <View style={styles.txtwrapper}>
             <Text style={styles.txt}>Sketchyness:</Text>
           </View>
           <View style={styles.inp}>
-            <Input />
+            <TextInput/>
           </View>
 
           <View style={styles.txtwrapper}>
             <Text style={styles.txt}>Availability:</Text>
           </View>
           <View style={styles.inp}>
-            <Input />
+            <TextInput/>
           </View>
         </View>
       </View>
