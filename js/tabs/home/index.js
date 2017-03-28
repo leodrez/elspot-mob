@@ -4,41 +4,78 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  TouchableWithoutFeedback
+  Image,
+  TouchableWithoutFeedback,
+  ListView
 } from 'react-native'
 
 export default class Home extends Component {
+  constructor (props) {
+    super(props)
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+    this.state = {
+      loading: false,
+      dataSource: ds.cloneWithRows([
+        {
+          image: 'https://cdn.pixabay.com/photo/2015/03/26/09/46/skateboard-690269_1280.jpg'
+        },
+        {
+          image: 'https://cdn.pixabay.com/photo/2015/03/26/09/46/skateboard-690269_1280.jpg'
+        },
+        {
+          image: 'https://cdn.pixabay.com/photo/2015/03/26/09/46/skateboard-690269_1280.jpg'
+        },
+        {
+          image: 'https://cdn.pixabay.com/photo/2015/03/26/09/46/skateboard-690269_1280.jpg'
+        }
+      ]),
+      spots: []
+    }
+  }
+
+  // componentDidMount () {
+  //   fetch(`http://localhost:3000/spots?sort=descending`)
+  //     .then(data => {
+  //       this.setState({
+  //         loading: false,
+  //         spots: data,
+  //         dataSource: ds.cloneWithRows(data)
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
+
   render () {
     return (
       <View style={styles.container}>
-
-        <View style={styles.main}>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.mainPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
+        
+        <View style={styles.headerContainer}>
+          <View style={styles.header}>
+            <Image source={require('../../../assets/icons/ic_elspotpink.png')} />
+          </View>
         </View>
 
-        <View style={styles.recentlyAdded}>
-          <Text style={styles.txt}>RECENTLY ADDED</Text>
+        <Text style={styles.txt}>RECENTLY ADDED</Text>
+        <View style={styles.recentlyAddedContainer}>
+          <ListView
+            automaticallyAdjustContentInsets={false}
+            contentContainerStyle={styles.recentlyAdded}
+            dataSource={this.state.dataSource}
+            enableEmptySections
+            renderRow={(spot) => {
+              return (
+                <TouchableWithoutFeedback style={styles.imgButton}>
+                  <View style={styles.imgFrame}>
+                    <Image style={styles.img} source={{ uri: spot.image }} />
+                  </View>
+                </TouchableWithoutFeedback>
+              )
+            }}
+          />
         </View>
 
-        <View style={styles.rowOne}>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-        </View>
-
-        <View style={styles.rowTwo}>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={this._goToSpot}>
-            <Text style={styles.imgPlaceholder}>Placeholder</Text>
-          </TouchableWithoutFeedback>
-        </View>
       </View>
     )
   }
@@ -50,43 +87,45 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
     backgroundColor: '#252839'
   },
-  main: {
-    flex: 4,
-    paddingHorizontal: 5,
-    paddingTop: 10
+  headerContainer: {
+    height: 55,
   },
-  mainPlaceholder: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  recentlyAdded: {
+  header: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingHorizontal: 5
+    alignItems: 'center',
+    backgroundColor: '#EDF5FA',
+    paddingTop: 10
   },
-  rowOne: {
-    flex: 2,
+  recentlyAddedContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  recentlyAdded: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5
-  },
-  rowTwo: {
-    flex: 2,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5
-  },
-  imgPlaceholder: {
-    height: Dimensions.get('window').height - 560,
-    width: Dimensions.get('window').width - 195,
-    backgroundColor: '#fff'
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   txt: {
     color: '#B0F6E6',
-    fontSize: 18
+    fontSize: 18,
+    padding: 20
+  },
+  imgButton: {
+    padding: 25
+  },
+  imgFrame: {
+    width: (Dimensions.get('window').width / 2) - 10,
+    height: 100
+  },
+  img: {
+    width: (Dimensions.get('window').width / 2)  - 20,
+    height: 90,
   }
 })

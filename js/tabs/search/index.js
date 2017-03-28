@@ -34,7 +34,7 @@ export default class Search extends Component {
         // let latitude = coords.latitude || 18.411178
         // let longitude = coords.longitude || -66.072216
         // return fetch(`http://localhost:3000/spots?location=true&latitude${latitude}&longitude=${longitude}`)
-        return Promise.resolve(['row1', 'row2', 'row2'])
+        return Promise.resolve([])
       })
       .then(data => {
         this.setState({
@@ -63,7 +63,17 @@ export default class Search extends Component {
             latitudeDelta: 1.0,
             longitudeDelta: 0.9,
           }}
-        />
+        >
+          {this.state.spots.map(spot => {
+            return (
+              <MapView.Marker
+                coordinates={{ latitude: spot.location.lat, longitude: spot.location.lon }}
+                title={spot.name}
+                description={spot.description}
+              />
+            )
+          })}
+        </MapView>
       </View>
     )
   }
